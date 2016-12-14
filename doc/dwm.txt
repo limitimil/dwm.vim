@@ -47,19 +47,21 @@ Development happens on GitHub.com:
 
 
 ==============================================================================
-COMMANDS                                                        *dwm-commands*
+FUNCTIONS                                                      *dwm-functions*
 
-:DWM_New                                                            *:DWM_New*
+DWM_New()                                                          *DWM_New()*
 
-Creates a new window with an empty buffer in the master pane.
+Creates a new window with an empty buffer in the master pane. If provided with
+an argument <arg>, starts editing the file <arg> in a new window in the master
+pane.
 
 
-:DWM_Close                                                        *:DWM_Close*
+DWM_Close()                                                      *DWM_Close()*
 
 Closes the active window if no unsaved changes are pending.
 
 
-:DWM_Focus                                                        *:DWM_Focus*
+DWM_Focus()                                                      *DWM_Focus()*
 
 Focus the active window by placing it in the master pane.
 
@@ -70,9 +72,9 @@ MAPPINGS                                                        *dwm-mappings*
 When |'g:dwm_map_keys'| is not defined or set to 1 the following keys are
 mapped:
 
-  <c-n>     |:DWM_New|
-  <c-c>     |:DWM_Close|
-  <c-space> |:DWM_Focus|
+  <c-n>     |DWM_New()|
+  <c-c>     |DWM_Close()|
+  <c-space> |DWM_Focus()|
   <c-j>     Move cursor clockwise to the next window
   <c-k>     Move cursor counter-clockwise to the previous window
   <c-,>     Rotate windows counter-clockwise
@@ -80,15 +82,42 @@ mapped:
   <c-h>     Grow Master Pane Width
   <c-l>     Shrink Master Pane Width
 
+Additionally, if both |'g:dwm_map_keys'| and |'g:dwm_make_commands'| are not
+defined or set to 1, the following keys are mapped:
+
+  <c-p>     Switch to command mode, prepopulate the command with |:Split| and
+            lets you complete with a file name.
+
+==============================================================================
+COMMANDS                                                        *dwm-commands*
+
+When |'g:dwm_make_commands'| is not defined or set to 1 the following keys are
+mapped:
+
+  :New      |DWM_New()|                                                 *:New*
+  :Split    Calls |DWM_New()| and starts editing the file <arg> in    *:Split*
+            the master area
+  :Close    |DWM_Close()|                                             *:Close*
+  :Focus    |DWM_Focus()|
+  :Grow     Grow Master Pane Width                                     *:Grow*
+  :Shrink   Shrink Master Pane Width                                 *:Shrink*
+
 
 ==============================================================================
 OPTIONS                                                          *dwm-options*
 
                                                             *'g:dwm_map_keys'*
 Default: 1
-If enabled, dwm maps control keys to the commands.
+If enabled, dwm maps control keys to the functions.
 >
     let g:dwm_map_keys=0
+<
+
+                                                       *'g:dwm_make_commands'*
+Default: 1
+If enabled, dwm defines commands.
+>
+    let g:dwm_make_commands=1
 <
 
                                                    *'g:dwm_master_pane_width'*
@@ -107,6 +136,9 @@ will be set to a relative percentage of the editor's width.
 ==============================================================================
 CHANGELOG                                                      *dwm-changelog*
 
+0.1.3
+    - Commands
+    - Optional argument to prepopulate new window
 0.1.2
     - use of `hasmapto`
 0.1.1
@@ -127,6 +159,7 @@ Contributors in alphabetical order
     mitnk (mitnk)
     Tony Narlock (tony)
     rhacker (rhacker)
+    Raphaël Proust (raphael-proust)
     Larry Marburger (lmarburger)
     Adrien (afriggeri)
 
