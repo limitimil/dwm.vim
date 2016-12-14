@@ -66,11 +66,15 @@ function! DWM_Stack(clockwise)
 endfunction
 
 " Add a new buffer
-function! DWM_New()
+function! DWM_New(...)
   " Move current master pane to the stack
   call DWM_Stack(1)
   " Create a vertical split
-  vert topleft new
+  if a:0 < 1
+    vert topleft new
+  else
+    exec 'vert topleft split ' .  a:000[0]
+  end
   call DWM_ResizeMasterPaneWidth()
 endfunction
 
@@ -222,6 +226,27 @@ if g:dwm_map_keys
       nmap <C-H> <Plug>DWMShrinkMaster
   endif
 endif
+
+if !exists('g:dwm_make_commands')
+  let g:dwm_make_commands = 1
+endif
+
+if g:dwm_make_commands
+  "TODO: New and Split should be the same command with an optional argument
+  command -nargs=0 New :call DWM_New()
+  command -nargs=1 -complete=file Split :exec 'call DWM_New(' . "'<args>'" . ')'
+  command -nargs=0 Close :call DWM_Close()
+  command -nargs=0 Focus :call DWM_Focus()
+  "TODO: There should be an optional argument to Focus to choose which buffer
+  command -nargs=0 Grow :call DWM_GrowMaster()
+  command -nargs=0 Shrink :call DWM_ShrinkMaster()
+endif
+
+if g:dwm_make_commands
+  if g:dwm_map_keys
+      nmap <C-P> :Split 
+  end
+end
 
 if has('autocmd')
   augroup dwm
