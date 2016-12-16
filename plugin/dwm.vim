@@ -255,6 +255,6 @@ end
 if has('autocmd')
   augroup dwm
     au!
-    au BufWinEnter * if &l:buflisted || &l:filetype == 'help' | call DWM_AutoEnter() | endif
+    au BufWinEnter * if !&l:buflisted || &l:filetype == 'help' | call DWM_AutoEnter() | endif
   augroup end
 endif
