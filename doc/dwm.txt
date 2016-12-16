@@ -52,8 +52,8 @@ FUNCTIONS                                                      *dwm-functions*
 DWM_New()                                                          *DWM_New()*
 
 Creates a new window with an empty buffer in the master pane. If provided with
-an argument <arg>, starts editing the file <arg> in a new window in the master
-pane.
+a list of arguments, the command expands each of them with |glob()| and opens
+all the obtained files.
 
 
 DWM_Close()                                                      *DWM_Close()*
@@ -95,8 +95,7 @@ When |'g:dwm_make_commands'| is not defined or set to 1 the following keys are
 mapped:
 
   :New      |DWM_New()|                                                 *:New*
-  :Split    Calls |DWM_New()| and starts editing the file <arg> in    *:Split*
-            the master area
+  :Split    |DWM_New()| with arguments and file completion.           *:Split*
   :Close    |DWM_Close()|                                             *:Close*
   :Focus    |DWM_Focus()|
   :Grow     Grow Master Pane Width                                     *:Grow*
