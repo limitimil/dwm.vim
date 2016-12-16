@@ -6,9 +6,10 @@
 CONTENTS                                                        *dwm-contents*
 
     1.Intro...................................|dwm-intro|
-    2.Commands................................|dwm-commands|
+    2.Functions...............................|dwm-functions|
     3.Mappings................................|dwm-mappings|
     4.Options.................................|dwm-options|
+    2.Commands................................|dwm-commands|
     5.Changelog...............................|dwm-changelog|
     6.Credits.................................|dwm-credits|
     7.License.................................|dwm-license|
@@ -31,11 +32,11 @@ master pane on the left and a stacked pane on the right side:
     |              |        S3        |
     +---------------------------------+
 
-|:DWM_New| creates a new window in the master pane that is associated with a
+|DWM_New()| creates a new window in the master pane that is associated with a
 new empty buffer. The previous master window is pushed on top of the stacked
-pane. |:DWM_Closes| closes any window as long as no unsaved changes are
+pane. |DWM_Close()| closes any window as long as no unsaved changes are
 pending and updates the layout. An active, stacked window is focused and moved
-to the master pane with |:DWM_Focus|.
+to the master pane with |DWM_Focus()|.
 
 Official releases can be found on vim.org:
 
@@ -137,7 +138,7 @@ CHANGELOG                                                      *dwm-changelog*
 
 0.1.3
     - Commands
-    - Optional argument to prepopulate new window
+    - Optional arguments to prepopulate new windows
 0.1.2
     - use of `hasmapto`
 0.1.1
