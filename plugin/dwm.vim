@@ -74,10 +74,16 @@ function! DWM_New(...)
     vert topleft new
   else
     for f in a:000
-      for g in glob(f, 0, 1)
+      let l:globs = glob(f,0,1)
+      if len(l:globs) > 0
+        for g in glob(f, 0, 1)
+          call DWM_Stack(1)
+          exec 'vert topleft split ' . g
+        endfor
+      else
         call DWM_Stack(1)
-        exec 'vert topleft split ' . g
-      endfor
+        exec 'vert topleft split ' . f
+      endif
     endfor
   end
   call DWM_ResizeMasterPaneWidth()
